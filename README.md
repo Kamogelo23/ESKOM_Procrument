@@ -20,7 +20,6 @@ row.names(data) <- data$date
 
 # Select the 'demand' column and convert to a time series
 demand_ts <- ts(data$demand, start = c(2020, 1), frequency = 365)
-Save to grepper
 2. Exploratory Data Analysis
 
 Next, you'll want to explore your data to understand its structure and the relationships between variables. This could involve visualizing the data, checking for trends or seasonality, and computing descriptive statistics.
@@ -43,7 +42,7 @@ decomposed <- stl(demand_ts, s.window="periodic")
 
 # Plot the decomposed time series
 autoplot(decomposed)
-Save to grepper
+
 4. Model Fitting and Forecasting
 
 Next, you'll fit a model to your data and use it to make forecasts. You might choose a model like an ARIMA or Exponential Smoothing model, depending on the characteristics of your data.
@@ -58,7 +57,7 @@ forecasted <- forecast(fit, h=30)
 
 # Plot the forecast
 autoplot(forecasted)
-Save to grepper
+
 5. Model Evaluation
 
 Finally, you'll want to evaluate how well your model performed. This could involve computing error metrics, checking the residuals of your model, and comparing your forecasts to actual values.
