@@ -1,6 +1,4 @@
 Load and Preprocess Data
-python
-Copy code
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
@@ -17,27 +15,19 @@ data.set_index('date', inplace=True)
 
 # Select the 'demand' column
 demand_ts = data['demand']
-Save to grepper
-Exploratory Data Analysis
-python
-Copy code
+####Exploratory Data Analysis
 # Plot the time series
 demand_ts.plot(title="Electricity Demand Over Time", xlabel="Time", ylabel="Demand")
 plt.show()
-Save to grepper
-Time Series Decomposition
-python
-Copy code
+##############Time Series Decomposition
+
 # Decompose the time series
 decomposed = seasonal_decompose(demand_ts, freq=365)
 
 # Plot the decomposed time series
 decomposed.plot()
 plt.show()
-Save to grepper
 Model Fitting and Forecasting
-python
-Copy code
 # Fit an ARIMA model to the data
 model = ARIMA(demand_ts, order=(5,1,0))
 fit = model.fit()
@@ -53,10 +43,7 @@ plt.xlabel("Time")
 plt.ylabel("Demand")
 plt.legend()
 plt.show()
-Save to grepper
-Model Evaluation
-python
-Copy code
+####Model Evaluation
 # Compute Mean Squared Error
 mse = mean_squared_error(demand_ts[-30:], forecasted)
 print(f"Mean Squared Error: {mse}")
