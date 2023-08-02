@@ -1,0 +1,67 @@
+Load and Preprocess Data
+python
+Copy code
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
+from statsmodels.tsa.seasonal import seasonal_decompose
+from statsmodels.tsa.arima.model import ARIMA
+from sklearn.metrics import mean_squared_error
+
+# Load the data
+data = pd.read_csv("path/to/your/data.csv")
+
+# Convert 'date' to a date type
+data['date'] = pd.to_datetime(data['date'])
+data.set_index('date', inplace=True)
+
+# Select the 'demand' column
+demand_ts = data['demand']
+Save to grepper
+Exploratory Data Analysis
+python
+Copy code
+# Plot the time series
+demand_ts.plot(title="Electricity Demand Over Time", xlabel="Time", ylabel="Demand")
+plt.show()
+Save to grepper
+Time Series Decomposition
+python
+Copy code
+# Decompose the time series
+decomposed = seasonal_decompose(demand_ts, freq=365)
+
+# Plot the decomposed time series
+decomposed.plot()
+plt.show()
+Save to grepper
+Model Fitting and Forecasting
+python
+Copy code
+# Fit an ARIMA model to the data
+model = ARIMA(demand_ts, order=(5,1,0))
+fit = model.fit()
+
+# Forecast the next 30 days
+forecasted = fit.forecast(steps=30)
+
+# Plot the forecast
+plt.plot(demand_ts, label="Original")
+plt.plot(forecasted, label="Forecasted")
+plt.title("Electricity Demand Forecast")
+plt.xlabel("Time")
+plt.ylabel("Demand")
+plt.legend()
+plt.show()
+Save to grepper
+Model Evaluation
+python
+Copy code
+# Compute Mean Squared Error
+mse = mean_squared_error(demand_ts[-30:], forecasted)
+print(f"Mean Squared Error: {mse}")
+
+# Check residuals
+residuals = pd.DataFrame(fit.resid)
+residuals.plot(title="Residuals")
+plt.show()
